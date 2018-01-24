@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">What To Watch</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_home_title">Home</string>
+    <string name="nav_find_title">Find</string>
+    <string name="nav_header_text">Temp header text</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="text_choose_genre">Choose genre</string>
+    <string name="btn_find">Find movies</string>
+
+    <!-- Errors -->
+    <string name="generic_network_error">Network error</string>
+
+    <!-- Swipe view -->
+    <string name="add">Add to my list</string>
+    <string name="dismiss">Dismiss</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
