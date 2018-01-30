@@ -13,6 +13,7 @@ import com.micste.whattowatch.model.Result;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
+import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 import com.mindorks.placeholderview.annotations.swipe.SwipeCancelState;
@@ -21,6 +22,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 
+@NonReusable
 @Layout(R.layout.item_card_view)
 public class ItemCard {
 
@@ -32,9 +34,6 @@ public class ItemCard {
 
     @View(R.id.voteAverageText)
     private TextView voteAverage;
-
-    @View(R.id.synopsisText)
-    private TextView synopsis;
 
     private Result result;
     private Context context;
@@ -52,7 +51,6 @@ public class ItemCard {
         Glide.with(context).load(imageurl).into(posterImageView);
         title.setText(result.getTitle());
         voteAverage.setText(String.valueOf(result.getVoteAverage()));
-        synopsis.setText(result.getOverview());
     }
 
     @SwipeOut
@@ -83,8 +81,8 @@ public class ItemCard {
 
     @Click(R.id.cardView)
     private void onItemClick() {
-        //TODO Send data to activity, add enter transition
         Intent intent = new Intent(context, DetailsActivity.class);
+        intent.putExtra("EXTRA_BACKDROP_URL", result.getBackdropPath());
         context.startActivity(intent);
     }
 }

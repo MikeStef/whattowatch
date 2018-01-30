@@ -6,18 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.micste.whattowatch.R;
 import com.micste.whattowatch.model.Genre;
 import com.micste.whattowatch.model.GenresResponse;
