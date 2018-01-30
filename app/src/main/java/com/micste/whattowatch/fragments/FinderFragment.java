@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,25 +34,27 @@ import retrofit2.Response;
 public class FinderFragment extends Fragment {
     private static final String ARG_GENRE = "genre";
     private static final String ARG_GENRE_ID = "genreID";
+    private static final String ARG_SORT_BY = "sortBy";
 
     private String genre;
     private int genreId;
+    private String sortBy;
     private ApiService apiService;
     private List<Result> results;
     private CoordinatorLayout coordinatorLayout;
     private SwipePlaceHolderView swipeView;
-    private int marginBot = 160; // dp
 
 
     public FinderFragment() {
         // Required empty public constructor
     }
 
-    public static FinderFragment newInstance(String genre, int id) {
+    public static FinderFragment newInstance(String genre, int id, String sortBy) {
         FinderFragment fragment = new FinderFragment();
         Bundle args = new Bundle();
         args.putString(ARG_GENRE, genre);
         args.putInt(ARG_GENRE_ID, id);
+        args.putString(ARG_SORT_BY, sortBy);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,6 +65,7 @@ public class FinderFragment extends Fragment {
         if (getArguments() != null) {
             genre = getArguments().getString(ARG_GENRE);
             genreId = getArguments().getInt(ARG_GENRE_ID);
+            sortBy = getArguments().getString(ARG_SORT_BY);
         }
     }
 
@@ -78,6 +82,7 @@ public class FinderFragment extends Fragment {
 
         coordinatorLayout = getActivity().findViewById(R.id.mainCoordinatorLayout);
         swipeView = view.findViewById(R.id.swipeView);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
 
         Point windowSize = ConverterHelper.getDisplaySize(getActivity().getWindowManager());
 
@@ -85,7 +90,7 @@ public class FinderFragment extends Fragment {
                 .setDisplayViewCount(3)
                 .setSwipeDecor(new SwipeDecor()
                         .setViewWidth(windowSize.x)
-                        .setViewHeight(windowSize.y - ConverterHelper.dpToPx(marginBot))
+                        .setViewHeight(windowSize.y - toolbar.getHeight() )
                         .setViewGravity(Gravity.TOP)
                         .setPaddingTop(20)
                         .setRelativeScale(0.01f)
@@ -106,7 +111,7 @@ public class FinderFragment extends Fragment {
     }
 
     private void getResults() {
-        apiService.getMovies(String.valueOf(genreId)).enqueue(new Callback<MoviesByGenreResponse>() {
+        apiService.getMovies(String.valueOf(genreId), sortBy).enqueue(new Callback<MoviesByGenreResponse>() {
             @Override
             public void onResponse(Call<MoviesByGenreResponse> call, Response<MoviesByGenreResponse> response) {
                 if (response.isSuccessful()) {

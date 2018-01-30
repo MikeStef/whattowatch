@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.google.gson.Gson;
@@ -32,11 +33,17 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
+    private static final String MOST_POPULAR = "popularity.desc";
+    private static final String HIGHEST_RATED = "vote_average.desc";
+    private static final String RELEASE_DATE = "release_date.desc";
+
     private ApiService apiService;
     private List<Genre> genres = new ArrayList<>();
     private Spinner genreSpinner;
     private Button buttonFind;
+    private RadioGroup sortByRadioGroup;
     private CoordinatorLayout coordinatorLayout;
+    private String sortBy;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,9 +63,12 @@ public class HomeFragment extends Fragment {
 
         genreSpinner = view.findViewById(R.id.spinnerGenres);
         buttonFind = view.findViewById(R.id.buttonFind);
+        sortByRadioGroup = view.findViewById(R.id.sortByRadioGroup);
         coordinatorLayout = getActivity().findViewById(R.id.mainCoordinatorLayout);
 
         apiService = ApiHelper.getApiService();
+        sortBy = MOST_POPULAR; // Set default sorting
+
         getGenresCached();
         setupListeners();
     }
@@ -70,6 +80,23 @@ public class HomeFragment extends Fragment {
                 gotoFinderFragment();
             }
         });
+
+        sortByRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radioMostPopular:
+                        sortBy = MOST_POPULAR;
+                        break;
+                    case R.id.radioHighestRated:
+                        sortBy = HIGHEST_RATED;
+                        break;
+                    case R.id.radioReleaseDate:
+                        sortBy = RELEASE_DATE;
+                        break;
+                }
+            }
+        });
     }
 
     private void gotoFinderFragment() {
@@ -77,7 +104,7 @@ public class HomeFragment extends Fragment {
         String genre = genres.get(position).getName();
         int genreId = genres.get(position).getId();
 
-        Fragment finderFragment = FinderFragment.newInstance(genre, genreId);
+        Fragment finderFragment = FinderFragment.newInstance(genre, genreId, sortBy);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.mainContent, finderFragment).commit();
     }

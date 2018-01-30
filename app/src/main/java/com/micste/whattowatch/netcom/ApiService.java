@@ -14,6 +14,7 @@ public interface ApiService {
     Call<GenresResponse> getGenres();
 
     @GET("3/discover/movie?api_key=" + BuildConfig.API_KEY +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1")
-    Call<MoviesByGenreResponse> getMovies(@Query("with_genres") String genre);
+            "&language=en-US&include_adult=false&include_video=false&page=1")
+    Call<MoviesByGenreResponse> getMovies(@Query("with_genres") String genre,
+                                          @Query("sort_by") String sortBy);
 }

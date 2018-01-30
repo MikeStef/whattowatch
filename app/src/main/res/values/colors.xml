@@ -5,4 +5,5 @@
     <color name="colorAccent">#66bb6a</color>
 
     <color name="lightGray">#626262</color>
+    <color name="dividerGray">#474545</color>
 </resources>

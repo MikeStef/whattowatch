@@ -9,6 +9,10 @@
     <string name="drawer_close">Close navigation drawer</string>
 
     <string name="text_choose_genre">Choose genre</string>
+    <string name="text_sort_by">Sort by</string>
+    <string name="text_most_popular">Most popular</string>
+    <string name="text_highest_rated">Highest rated</string>
+    <string name="text_release_date">Release date</string>
     <string name="btn_find">Find movies</string>
 
     <!-- Errors -->
