@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.micste.whattowatch.fragments.HomeFragment">
 
     <LinearLayout
@@ -45,23 +46,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RadioButton
+            <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/radioMostPopular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                app:buttonTint="@color/colorAccent"
                 android:text="@string/text_most_popular" />
 
-            <RadioButton
+            <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/radioHighestRated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:buttonTint="@color/colorAccent"
                 android:text="@string/text_highest_rated" />
 
-            <RadioButton
+            <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/radioReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:buttonTint="@color/colorAccent"
                 android:text="@string/text_release_date" />
         </RadioGroup>
 

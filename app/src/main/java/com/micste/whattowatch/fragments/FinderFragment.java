@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.micste.whattowatch.R;
 import com.micste.whattowatch.model.MoviesByGenreResponse;
@@ -43,6 +44,7 @@ public class FinderFragment extends Fragment {
     private List<Result> results;
     private CoordinatorLayout coordinatorLayout;
     private SwipePlaceHolderView swipeView;
+    private ProgressBar progressBar;
 
 
     public FinderFragment() {
@@ -82,15 +84,17 @@ public class FinderFragment extends Fragment {
 
         coordinatorLayout = getActivity().findViewById(R.id.mainCoordinatorLayout);
         swipeView = view.findViewById(R.id.swipeView);
+        progressBar = view.findViewById(R.id.progressBar);
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
 
         Point windowSize = ConverterHelper.getDisplaySize(getActivity().getWindowManager());
+        int marginBot = toolbar.getHeight() + 50;
 
         swipeView.getBuilder()
                 .setDisplayViewCount(3)
                 .setSwipeDecor(new SwipeDecor()
                         .setViewWidth(windowSize.x)
-                        .setViewHeight(windowSize.y - toolbar.getHeight() )
+                        .setViewHeight(windowSize.y - marginBot )
                         .setViewGravity(Gravity.TOP)
                         .setPaddingTop(20)
                         .setRelativeScale(0.01f)
@@ -111,6 +115,8 @@ public class FinderFragment extends Fragment {
     }
 
     private void getResults() {
+        progressBar.setVisibility(View.VISIBLE);
+
         apiService.getMovies(String.valueOf(genreId), sortBy).enqueue(new Callback<MoviesByGenreResponse>() {
             @Override
             public void onResponse(Call<MoviesByGenreResponse> call, Response<MoviesByGenreResponse> response) {
@@ -123,11 +129,13 @@ public class FinderFragment extends Fragment {
                 } else {
                     SnackBarHelper.showSnackBarMessage(coordinatorLayout, getString(R.string.generic_network_error));
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<MoviesByGenreResponse> call, Throwable t) {
                 SnackBarHelper.showSnackBarMessage(coordinatorLayout, getString(R.string.generic_network_error));
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
