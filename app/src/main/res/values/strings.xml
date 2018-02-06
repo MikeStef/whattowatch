@@ -2,9 +2,10 @@
     <string name="app_name">What To Watch</string>
 
     <!-- Navigation Drawer -->
-    <string name="nav_home_title">Home</string>
-    <string name="nav_find_title">Find</string>
     <string name="nav_header_text">Temp header text</string>
+    <string name="nav_home_title">Home</string>
+    <string name="nav_discover_title">Discover</string>
+    <string name="nav_mylist_title">My list</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 

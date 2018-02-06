@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.micste.whattowatch.fragments.HomeFragment">
+    tools:context="com.micste.whattowatch.fragments.DiscoverFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

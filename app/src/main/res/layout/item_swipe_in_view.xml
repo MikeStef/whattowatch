@@ -7,9 +7,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         android:layout_margin="40dp"
-        android:textColor="@android:color/holo_green_dark"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:textColor="@color/radiantGreen"
         android:text="@string/add"/>
 </LinearLayout>

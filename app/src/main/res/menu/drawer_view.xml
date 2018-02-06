@@ -4,13 +4,15 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_discover"
             android:checked="true"
-            android:title="@string/nav_home_title" />
+            android:icon="@drawable/ic_search"
+            android:title="@string/nav_discover_title" />
 
         <item
-            android:id="@+id/nav_find"
-            android:title="@string/nav_find_title" />
+            android:id="@+id/nav_mylist"
+            android:icon="@drawable/ic_list"
+            android:title="@string/nav_mylist_title" />
 
     </group>
 

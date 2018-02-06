@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.micste.whattowatch.fragments.DiscoverFragment;
 import com.micste.whattowatch.fragments.FinderFragment;
-import com.micste.whattowatch.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
 
         if (savedInstanceState == null) {
-            Fragment homeFragment = new HomeFragment();
+            Fragment homeFragment = new DiscoverFragment();
             fragmentManager.beginTransaction().replace(R.id.mainContent, homeFragment).commit();
         }
     }
@@ -84,19 +83,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectDrawerItem(MenuItem menuItem) {
 
-        // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
 
         switch(menuItem.getItemId()) {
-            case R.id.nav_home:
-                fragmentClass = HomeFragment.class;
-                break;
-            case R.id.nav_find:
-                fragmentClass = FinderFragment.class;
+            case R.id.nav_discover:
+                fragmentClass = DiscoverFragment.class;
                 break;
             default:
-                fragmentClass = HomeFragment.class;
+                fragmentClass = DiscoverFragment.class;
         }
 
         try {

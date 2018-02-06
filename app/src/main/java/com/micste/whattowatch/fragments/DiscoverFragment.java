@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class DiscoverFragment extends Fragment {
 
     private static final String MOST_POPULAR = "popularity.desc";
     private static final String HIGHEST_RATED = "vote_average.desc";
@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
     private CoordinatorLayout coordinatorLayout;
     private String sortBy;
 
-    public HomeFragment() {
+    public DiscoverFragment() {
         // Required empty public constructor
     }
 
@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_discover, container, false);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<GenresResponse> call, Throwable t) {
                 SnackBarHelper.showSnackBarMessage(coordinatorLayout, getString(R.string.generic_network_error));
-                Log.d("HomeFragment", "onFailure: " + t.getMessage());
+                Log.d("DiscoverFragment", "onFailure: " + t.getMessage());
             }
         });
     }

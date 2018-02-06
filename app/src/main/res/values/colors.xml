@@ -3,7 +3,11 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#66bb6a</color>
+    <color name="primaryLight">#353535</color>
 
     <color name="lightGray">#626262</color>
     <color name="dividerGray">#474545</color>
+    <color name="boomingRed">#f95454</color>
+    <color name="radiantGreen">#34f93e</color>
+
 </resources>
