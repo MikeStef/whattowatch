@@ -84,6 +84,7 @@ public class ItemCard {
         Intent intent = new Intent(context, DetailsActivity.class);
         intent.putExtra("EXTRA_BACKDROP_URL", result.getBackdropPath());
         intent.putExtra("EXTRA_MEDIA_ID", result.getId());
+        intent.putExtra("EXTRA_MEDIA_TITLE", result.getTitle());
         context.startActivity(intent);
     }
 }

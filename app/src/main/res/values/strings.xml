@@ -23,5 +23,11 @@
     <string name="add">Add to my list</string>
     <string name="dismiss">Dismiss</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Details -->
+    <string name="overview_title">Overview</string>
+    <string name="minutes_short">m</string>
+    <string name="language_title">Language:</string>
+    <string name="budget_title">Budget:</string>
+    <string name="not_available">N/A</string>
+    <string name="action_add">Add to list</string>
 </resources>

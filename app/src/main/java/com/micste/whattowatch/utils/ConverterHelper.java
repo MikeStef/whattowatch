@@ -1,11 +1,14 @@
 package com.micste.whattowatch.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
+
+import com.micste.whattowatch.R;
 
 public class ConverterHelper {
     //TODO Redo this util method need to support < 16 SDK etc
