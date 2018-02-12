@@ -9,7 +9,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.micste.whattowatch.DetailsActivity;
 import com.micste.whattowatch.R;
+import com.micste.whattowatch.db.DatabaseHandler;
+import com.micste.whattowatch.model.MovieLight;
 import com.micste.whattowatch.model.Result;
+import com.micste.whattowatch.utils.SnackBarHelper;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
@@ -38,11 +41,13 @@ public class ItemCard {
     private Result result;
     private Context context;
     private SwipePlaceHolderView swipeView;
+    private DatabaseHandler databaseHandler;
 
     public ItemCard(Context context, Result result, SwipePlaceHolderView swipeView) {
         this.context = context;
         this.result = result;
         this.swipeView = swipeView;
+        this.databaseHandler = new DatabaseHandler(context);
     }
 
     @Resolve
@@ -66,7 +71,19 @@ public class ItemCard {
 
     @SwipeIn
     private void onSwipeIn() {
-        Log.d("EVENT", "onSwipedIn");
+        if (result != null) {
+
+            MovieLight movie = new MovieLight();
+            movie.setMovieId(result.getId());
+            movie.setPosterPath(result.getPosterPath());
+            movie.setReleaseDate(result.getReleaseDate());
+            movie.setTitle(result.getTitle());
+            movie.setVoteAverage(String.valueOf(result.getVoteAverage()));
+
+            if (!databaseHandler.checkIfMovieExists(String.valueOf(movie.getMovieId()))) {
+                databaseHandler.addMovie(movie);
+            }
+        }
     }
 
     @SwipeInState

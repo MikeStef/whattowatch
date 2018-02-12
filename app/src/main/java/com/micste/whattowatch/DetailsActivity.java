@@ -4,6 +4,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ApiService apiService;
     private CoordinatorLayout coordinatorLayout;
     private TextView overviewText, runtimeText, releaseDateText,
-            ratingText, languageText, budgetText;
+            ratingText, languageText, budgetText, genresText;
     private ProgressBar progressBar;
     private ImageView backdropImage;
     private MovieDetailsResponse movieDetails;
@@ -50,6 +51,7 @@ public class DetailsActivity extends AppCompatActivity {
         ratingText = findViewById(R.id.ratingText);
         languageText = findViewById(R.id.languageText);
         budgetText = findViewById(R.id.budgetText);
+        genresText = findViewById(R.id.genresText);
         progressBar = findViewById(R.id.progressBar);
         backdropImage = findViewById(R.id.backdropImage);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -105,6 +107,7 @@ public class DetailsActivity extends AppCompatActivity {
         releaseDateText.setText(movieDetails.getReleaseDate());
         ratingText.setText(String.valueOf(movieDetails.getVoteAverage()));
         languageText.setText(movieDetails.getOriginalLanguage());
+        genresText.setText(TextUtils.join(", ", movieDetails.getGenres()));
 
         if (movieDetails.getBudget() == 0 || movieDetails.getBudget() == null) {
             budgetText.setText(getString(R.string.not_available));

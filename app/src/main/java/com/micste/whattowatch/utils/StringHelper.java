@@ -1,8 +1,10 @@
 package com.micste.whattowatch.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.micste.whattowatch.R;
+import com.micste.whattowatch.model.Genre;
 import com.micste.whattowatch.model.SpokenLanguage;
 
 import java.util.List;
