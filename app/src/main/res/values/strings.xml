@@ -18,6 +18,7 @@
 
     <!-- Errors -->
     <string name="generic_network_error">Network error</string>
+    <string name="movie_already_added">Already added to watch list</string>
 
     <!-- Swipe view -->
     <string name="add">Add to my list</string>
@@ -30,4 +31,8 @@
     <string name="budget_title">Budget:</string>
     <string name="not_available">N/A</string>
     <string name="action_add">Add to list</string>
+    <string name="added_to_list">Added to  your watch list</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

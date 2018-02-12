@@ -13,11 +13,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.micste.whattowatch.db.DatabaseHandler;
 import com.micste.whattowatch.model.MovieDetailsResponse;
+import com.micste.whattowatch.model.MovieLight;
 import com.micste.whattowatch.netcom.ApiService;
 import com.micste.whattowatch.utils.ApiHelper;
 import com.micste.whattowatch.utils.SnackBarHelper;
 import com.micste.whattowatch.utils.StringHelper;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +34,9 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView overviewText, runtimeText, releaseDateText,
             ratingText, languageText, budgetText;
     private ProgressBar progressBar;
+    private ImageView backdropImage;
+    private MovieDetailsResponse movieDetails;
+    private DatabaseHandler databaseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +51,12 @@ public class DetailsActivity extends AppCompatActivity {
         languageText = findViewById(R.id.languageText);
         budgetText = findViewById(R.id.budgetText);
         progressBar = findViewById(R.id.progressBar);
-        ImageView backdropImage = findViewById(R.id.backdropImage);
+        backdropImage = findViewById(R.id.backdropImage);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         apiService = ApiHelper.getApiService();
+        databaseHandler = new DatabaseHandler(this);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,10 +66,6 @@ public class DetailsActivity extends AppCompatActivity {
         if (extras != null) {
             String title = extras.getString("EXTRA_MEDIA_TITLE");
             setTitle(title);
-
-            String backdropPath = extras.getString("EXTRA_BACKDROP_URL");
-            String imageUrl = "https://image.tmdb.org/t/p/w780" + backdropPath;
-            Glide.with(this).load(imageUrl).into(backdropImage);
 
             int mediaId = extras.getInt("EXTRA_MEDIA_ID");
             getDetails(mediaId);
@@ -76,7 +80,7 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MovieDetailsResponse> call, Response<MovieDetailsResponse> response) {
                 if (response.isSuccessful()) {
-                    MovieDetailsResponse movieDetails = response.body();
+                    movieDetails = response.body();
                     setupDetails(movieDetails);
                 } else {
                     SnackBarHelper.showSnackBarMessage(coordinatorLayout, getString(R.string.generic_network_error));
@@ -93,6 +97,10 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void setupDetails(MovieDetailsResponse movieDetails) {
+        String backdropPath = movieDetails.getBackdropPath();
+        String imageUrl = "https://image.tmdb.org/t/p/w780" + backdropPath;
+        Glide.with(this).load(imageUrl).into(backdropImage);
+
         runtimeText.setText(StringHelper.parseRuntime(movieDetails.getRuntime(), this));
         releaseDateText.setText(movieDetails.getReleaseDate());
         ratingText.setText(String.valueOf(movieDetails.getVoteAverage()));
@@ -107,6 +115,25 @@ public class DetailsActivity extends AppCompatActivity {
         overviewText.setText(movieDetails.getOverview());
 
 
+    }
+
+    private void addToWatchList() {
+        if (movieDetails != null) {
+
+            MovieLight movie = new MovieLight();
+            movie.setMovieId(movieDetails.getId());
+            movie.setPosterPath(movieDetails.getPosterPath());
+            movie.setReleaseDate(movieDetails.getReleaseDate());
+            movie.setTitle(movieDetails.getTitle());
+            movie.setVoteAverage(String.valueOf(movieDetails.getVoteAverage()));
+
+            if (databaseHandler.checkIfMovieExists(String.valueOf(movie.getMovieId()))) {
+                SnackBarHelper.showSnackBarMessage(coordinatorLayout, getString(R.string.movie_already_added));
+            } else {
+                databaseHandler.addMovie(movie);
+                SnackBarHelper.showSnackBarMessage(coordinatorLayout, getString(R.string.added_to_list));
+            }
+        }
     }
 
     @Override
@@ -126,7 +153,7 @@ public class DetailsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_add) {
-            return true;
+            addToWatchList();
         }
 
         return super.onOptionsItemSelected(item);

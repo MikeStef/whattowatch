@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.micste.whattowatch.fragments.DiscoverFragment;
 import com.micste.whattowatch.fragments.FinderFragment;
+import com.micste.whattowatch.fragments.WatchListFragment;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -89,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
             case R.id.nav_discover:
                 fragmentClass = DiscoverFragment.class;
+                break;
+            case R.id.nav_mylist:
+                fragmentClass = WatchListFragment.class;
                 break;
             default:
                 fragmentClass = DiscoverFragment.class;
