@@ -4,6 +4,7 @@ import com.micste.whattowatch.BuildConfig;
 import com.micste.whattowatch.model.GenresResponse;
 import com.micste.whattowatch.model.MovieDetailsResponse;
 import com.micste.whattowatch.model.MoviesByGenreResponse;
+import com.micste.whattowatch.model.ResultsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -22,4 +23,13 @@ public interface ApiService {
 
     @GET("3/movie/{movie_id}?api_key=" + BuildConfig.API_KEY + "&language=en-US")
     Call<MovieDetailsResponse> getMovieDetails(@Path("movie_id") int movieId);
+
+    @GET("3/movie/now_playing?api_key=" + BuildConfig.API_KEY + "&language=en-US&page=1")
+    Call<ResultsResponse> getNowPlaying();
+
+    @GET("3/movie/popular?api_key=" + BuildConfig.API_KEY + "&language=en-US&page=1")
+    Call<ResultsResponse> getMostPopular();
+
+    @GET("3/movie/upcoming?api_key=" + BuildConfig.API_KEY + "&language=en-US&page=1")
+    Call<ResultsResponse> getUpcoming();
 }

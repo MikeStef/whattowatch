@@ -30,4 +30,12 @@ public class StringHelper {
             return list.get(0).getName();
         }
     }
+
+    public static String appendRating(String rating) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(rating).append(" / ").append("10");
+
+        return sb.toString();
+    }
 }

@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import com.micste.whattowatch.R;
 
 public class ConverterHelper {
-    //TODO Redo this util method need to support < 16 SDK etc
+    //TODO Redo this util method
     public static Point getDisplaySize(WindowManager windowManager){
         try {
             if(Build.VERSION.SDK_INT > 16) {
@@ -23,7 +23,6 @@ public class ConverterHelper {
                 return new Point(0, 0);
             }
         }catch (Exception e){
-            e.printStackTrace();
             return new Point(0, 0);
         }
     }

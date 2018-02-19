@@ -105,7 +105,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         runtimeText.setText(StringHelper.parseRuntime(movieDetails.getRuntime(), this));
         releaseDateText.setText(movieDetails.getReleaseDate());
-        ratingText.setText(String.valueOf(movieDetails.getVoteAverage()));
+        ratingText.setText(StringHelper.appendRating(String.valueOf(movieDetails.getVoteAverage())));
         languageText.setText(movieDetails.getOriginalLanguage());
         genresText.setText(TextUtils.join(", ", movieDetails.getGenres()));
 

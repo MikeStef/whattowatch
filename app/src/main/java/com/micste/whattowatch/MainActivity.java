@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.micste.whattowatch.fragments.DiscoverFragment;
 import com.micste.whattowatch.fragments.FinderFragment;
+import com.micste.whattowatch.fragments.HomeFragment;
 import com.micste.whattowatch.fragments.WatchListFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
 
         if (savedInstanceState == null) {
-            Fragment homeFragment = new DiscoverFragment();
+            Fragment homeFragment = new HomeFragment();
             fragmentManager.beginTransaction().replace(R.id.mainContent, homeFragment).commit();
         }
     }
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass;
 
         switch(menuItem.getItemId()) {
+            case R.id.nav_home:
+                fragmentClass = HomeFragment.class;
+                break;
             case R.id.nav_discover:
                 fragmentClass = DiscoverFragment.class;
                 break;
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = WatchListFragment.class;
                 break;
             default:
-                fragmentClass = DiscoverFragment.class;
+                fragmentClass = HomeFragment.class;
         }
 
         try {
