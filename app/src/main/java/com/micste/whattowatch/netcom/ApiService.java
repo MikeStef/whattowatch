@@ -13,6 +13,8 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
+    //TODO Add support for language and pagination
+
     @GET("3/genre/movie/list?api_key=" + BuildConfig.API_KEY + "&language=en-US")
     Call<GenresResponse> getGenres();
 

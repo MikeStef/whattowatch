@@ -1,63 +1,70 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.micste.whattowatch.fragments.HomeFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/now_playing_header"
-        style="@style/TextHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
-        android:text="@string/now_playing" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/now_playing_recyclerview"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/now_playing_header"
-        android:clipToPadding="false" />
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.micste.whattowatch.fragments.HomeFragment">
 
-    <TextView
-        android:id="@+id/most_popular_header"
-        style="@style/TextHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
-        android:layout_below="@id/now_playing_recyclerview"
-        android:text="@string/most_popular" />
+        <TextView
+            android:id="@+id/now_playing_header"
+            style="@style/TextHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/now_playing" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/most_popular_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/most_popular_header"
-        android:clipToPadding="false" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/now_playing_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/now_playing_header"
+            android:clipToPadding="false" />
 
-    <TextView
-        android:id="@+id/upcoming_header"
-        style="@style/TextHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
-        android:layout_below="@id/most_popular_recyclerview"
-        android:text="@string/upcoming" />
+        <TextView
+            android:id="@+id/most_popular_header"
+            style="@style/TextHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:layout_below="@id/now_playing_recyclerview"
+            android:text="@string/most_popular" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/upcoming_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/upcoming_header"
-        android:clipToPadding="false" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/most_popular_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/most_popular_header"
+            android:clipToPadding="false" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/upcoming_header"
+            style="@style/TextHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:layout_below="@id/most_popular_recyclerview"
+            android:text="@string/upcoming" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/upcoming_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/upcoming_header"
+            android:clipToPadding="false" />
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
