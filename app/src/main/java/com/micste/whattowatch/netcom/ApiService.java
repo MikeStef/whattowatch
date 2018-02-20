@@ -19,9 +19,10 @@ public interface ApiService {
     Call<GenresResponse> getGenres();
 
     @GET("3/discover/movie?api_key=" + BuildConfig.API_KEY +
-            "&language=en-US&include_adult=false&include_video=false&page=1")
+            "&language=en-US&include_adult=false&include_video=false")
     Call<MoviesByGenreResponse> getMovies(@Query("with_genres") String genre,
-                                          @Query("sort_by") String sortBy);
+                                          @Query("sort_by") String sortBy,
+                                          @Query("page") int page);
 
     @GET("3/movie/{movie_id}?api_key=" + BuildConfig.API_KEY + "&language=en-US")
     Call<MovieDetailsResponse> getMovieDetails(@Path("movie_id") int movieId);

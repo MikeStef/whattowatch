@@ -60,13 +60,11 @@ public class ItemCard {
 
     @SwipeOut
     private void onSwipedOut() {
-        Log.d("EVENT", "onSwipedOut");
-        swipeView.addView(this);
+
     }
 
     @SwipeCancelState
     private void onSwipeCancelState() {
-        Log.d("EVENT", "onSwipeCancelState");
     }
 
     @SwipeIn
@@ -88,12 +86,10 @@ public class ItemCard {
 
     @SwipeInState
     private void onSwipeInState() {
-        Log.d("EVENT", "onSwipeInState");
     }
 
     @SwipeOutState
     private void onSwipeOutState() {
-        Log.d("EVENT", "onSwipeOutState");
     }
 
     @Click(R.id.cardView)

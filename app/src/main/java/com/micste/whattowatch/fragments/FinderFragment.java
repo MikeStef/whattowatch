@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.micste.whattowatch.R;
 import com.micste.whattowatch.model.MoviesByGenreResponse;
@@ -39,12 +40,15 @@ public class FinderFragment extends Fragment {
 
     private String genre;
     private int genreId;
+    private int currentPage = 1, totalPages;
+    private boolean isLastPage = false;
     private String sortBy;
     private ApiService apiService;
     private List<Result> results;
     private CoordinatorLayout coordinatorLayout;
     private SwipePlaceHolderView swipeView;
     private ProgressBar progressBar;
+    private TextView errorText;
 
 
     public FinderFragment() {
@@ -85,6 +89,7 @@ public class FinderFragment extends Fragment {
         coordinatorLayout = getActivity().findViewById(R.id.mainCoordinatorLayout);
         swipeView = view.findViewById(R.id.swipeView);
         progressBar = view.findViewById(R.id.progressBar);
+        errorText = view.findViewById(R.id.errorText);
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
 
         Point windowSize = ConverterHelper.getDisplaySize(getActivity().getWindowManager());
@@ -105,7 +110,11 @@ public class FinderFragment extends Fragment {
             @Override
             public void onItemRemoved(int count) {
                 if (count == 3) {
-                    //TODO Add more results to swipeview
+                    if (!isLastPage) {
+                        loadMoreItems();
+                    }
+                } else if (count == 0) {
+                    displayErrorMessage();
                 }
             }
         });
@@ -117,15 +126,26 @@ public class FinderFragment extends Fragment {
     private void getResults() {
         progressBar.setVisibility(View.VISIBLE);
 
-        apiService.getMovies(String.valueOf(genreId), sortBy).enqueue(new Callback<MoviesByGenreResponse>() {
+        apiService.getMovies(String.valueOf(genreId), sortBy, currentPage).enqueue(new Callback<MoviesByGenreResponse>() {
             @Override
             public void onResponse(Call<MoviesByGenreResponse> call, Response<MoviesByGenreResponse> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
+                    MoviesByGenreResponse moviesByGenreResponse = response.body();
+                    totalPages = moviesByGenreResponse.getTotalPages();
+
+                    if (results != null && !results.isEmpty()) {
+                        results.clear();
+                    }
+
                     results = response.body().getResults();
 
                     for (Result result : results) {
                         swipeView.addView(new ItemCard(getActivity(), result, swipeView));
                     }
+
+                }
+                else if (response.code() == 422) {
+                    displayErrorMessage();
                 } else {
                     SnackBarHelper.showSnackBarMessage(coordinatorLayout, getString(R.string.generic_network_error));
                 }
@@ -138,5 +158,19 @@ public class FinderFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void loadMoreItems() {
+        currentPage += 1;
+        if (currentPage <= totalPages) {
+            getResults();
+        } else {
+            isLastPage = true;
+        }
+    }
+
+    private void displayErrorMessage() {
+        errorText.setText(getString(R.string.no_more_items));
+        errorText.setVisibility(View.VISIBLE);
     }
 }

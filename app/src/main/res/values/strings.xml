@@ -19,6 +19,7 @@
     <!-- Errors -->
     <string name="generic_network_error">Network error</string>
     <string name="movie_already_added">Already added to watch list</string>
+    <string name="no_more_items">You have gone through all movies. Do another search!</string>
 
     <!-- Swipe view -->
     <string name="add">Add to my list</string>
