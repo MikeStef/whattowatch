@@ -10,7 +10,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -18,8 +18,7 @@
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:expandedTitleGravity="center"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:titleEnabled="false"
             app:contentScrim="?attr/colorPrimary"
             app:statusBarScrim="@color/colorPrimaryDark"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -58,16 +57,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp">
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp">
+
+            <ImageView
+                android:id="@+id/details_poster"
+                android:layout_width="120dp"
+                android:layout_height="170dp" />
+
+            <TextView
+                android:id="@+id/details_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/details_poster"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Spiderman: Homecoming"
+                style="@style/TextAppearance.AppCompat.Title"/>
 
             <ImageView
                 android:id="@+id/timeIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/details_title"
+                android:layout_toRightOf="@id/details_poster"
                 android:tint="@color/lightGray"
                 android:layout_marginTop="2dp"
-                android:layout_marginLeft="3dp"
+                android:layout_marginLeft="6dp"
                 android:src="@drawable/ic_time"/>
 
             <TextView
@@ -76,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/timeIcon"
+                android:layout_below="@id/details_title"
                 android:textSize="15sp"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="5dp" />
@@ -85,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/runtimeText"
+                android:layout_below="@id/details_title"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="8dp"
                 android:tint="@color/lightGray"
@@ -97,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:layout_toRightOf="@id/releaseDateIcon"
+                android:layout_below="@id/details_title"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="5dp" />
 
@@ -105,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_below="@id/details_poster"
                 android:tint="@android:color/holo_orange_light"
                 android:src="@drawable/ic_star" />
 
@@ -114,6 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/ratingIcon"
+                android:layout_below="@id/details_poster"
                 android:textSize="15sp"
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="3dp"
@@ -123,17 +144,19 @@
                 android:id="@+id/genresText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/details_poster"
                 android:layout_below="@id/timeIcon"
                 android:text="Fantasy, Action"
                 android:textSize="15sp"
-                android:paddingLeft="5dp"
-                android:paddingTop="10dp"/>
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="4dp"/>
 
             <View
                 android:id="@+id/genresDivider"
                 style="@style/Divider"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/genresText" />
+                android:layout_below="@id/details_poster" />
 
             <LinearLayout
                 android:id="@+id/linearlayout_overview"

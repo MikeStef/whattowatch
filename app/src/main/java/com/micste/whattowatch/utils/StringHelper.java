@@ -1,13 +1,12 @@
 package com.micste.whattowatch.utils;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.micste.whattowatch.R;
-import com.micste.whattowatch.model.Genre;
 import com.micste.whattowatch.model.SpokenLanguage;
 
 import java.util.List;
+import java.util.Locale;
 
 public class StringHelper {
 
@@ -32,10 +31,12 @@ public class StringHelper {
     }
 
     public static String appendRating(String rating) {
-        StringBuilder sb = new StringBuilder();
+        return rating + " / " + "10";
+    }
 
-        sb.append(rating).append(" / ").append("10");
+    public static String formatBudgetNumbers(int value) {
 
-        return sb.toString();
+        String budget = String.format(Locale.getDefault(),"%,d", value);
+        return "$" + budget;
     }
 }

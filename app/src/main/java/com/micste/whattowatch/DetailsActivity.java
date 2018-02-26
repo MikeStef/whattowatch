@@ -23,6 +23,7 @@ import com.micste.whattowatch.utils.SnackBarHelper;
 import com.micste.whattowatch.utils.StringHelper;
 
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,10 +33,10 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ApiService apiService;
     private CoordinatorLayout coordinatorLayout;
-    private TextView overviewText, runtimeText, releaseDateText,
+    private TextView overviewText, runtimeText, releaseDateText, titleText,
             ratingText, languageText, budgetText, genresText;
     private ProgressBar progressBar;
-    private ImageView backdropImage;
+    private ImageView backdropImage, posterImage;
     private MovieDetailsResponse movieDetails;
     private DatabaseHandler databaseHandler;
 
@@ -54,8 +55,11 @@ public class DetailsActivity extends AppCompatActivity {
         genresText = findViewById(R.id.genresText);
         progressBar = findViewById(R.id.progressBar);
         backdropImage = findViewById(R.id.backdropImage);
+        posterImage = findViewById(R.id.details_poster);
+        titleText = findViewById(R.id.details_title);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("");
 
         apiService = ApiHelper.getApiService();
         databaseHandler = new DatabaseHandler(this);
@@ -67,7 +71,7 @@ public class DetailsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String title = extras.getString("EXTRA_MEDIA_TITLE");
-            setTitle(title);
+            titleText.setText(title);
 
             int mediaId = extras.getInt("EXTRA_MEDIA_ID");
             getDetails(mediaId);
@@ -99,9 +103,11 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void setupDetails(MovieDetailsResponse movieDetails) {
-        String backdropPath = movieDetails.getBackdropPath();
-        String imageUrl = "https://image.tmdb.org/t/p/w780" + backdropPath;
-        Glide.with(this).load(imageUrl).into(backdropImage);
+        String backdropImageUrl = "https://image.tmdb.org/t/p/w780" + movieDetails.getBackdropPath();
+        Glide.with(this).load(backdropImageUrl).into(backdropImage);
+
+        String posterImageUrl = "https://image.tmdb.org/t/p/w342" + movieDetails.getPosterPath();
+        Glide.with(this).load(posterImageUrl).into(posterImage);
 
         runtimeText.setText(StringHelper.parseRuntime(movieDetails.getRuntime(), this));
         releaseDateText.setText(movieDetails.getReleaseDate());
@@ -112,7 +118,7 @@ public class DetailsActivity extends AppCompatActivity {
         if (movieDetails.getBudget() == 0 || movieDetails.getBudget() == null) {
             budgetText.setText(getString(R.string.not_available));
         } else {
-            budgetText.setText(String.valueOf(movieDetails.getBudget()));
+            budgetText.setText(StringHelper.formatBudgetNumbers(movieDetails.getBudget()));
         }
 
         overviewText.setText(movieDetails.getOverview());
